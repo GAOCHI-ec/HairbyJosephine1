@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Appointment</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, violet, lavenderblush);
+            font-family: "Verdana", sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            background-color: #c084fc;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        form {
+            background: white;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        label{
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: 600;
+        }
+
+        nav {
+            background: white;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: purple;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: violet;
+        }
+
+        .style-container {
+            background-color: lavenderblush;
+            border-radius: 15px;
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .style-container h2 {
+            color: purple;
+        }
+        .gallery{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .gallery img{
+            width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        input, select, textarea{
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            font-size: 1em;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        input:focus, select:focus, textarea:focus{
+            border-color: #a855f7;
+            outline: none;
+        }
+        button {
+            background-color: #a855f7;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+            transition: 0.3s;
+        }
+        button:hover {background-color: #9333ea}
+        footer {
+            text-align: center;
+            color: #6b21a8;
+            font-size: 13px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="HairbyJosephine.html">Home</a >
+    <a href="view%20order.html">Thankyou</a>
+</nav>
+
+<div class="style-container">
+    <h1>Book Appointment</h1>
+    <p id="SelectedStyle"></p >
+</div>
+
+<form id="bookingForm">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" placeholder="Enter your full name" required>
+
+    <label for="phone">Phone Number or Wechat:</label>
+    <input type="text" id="phone" placeholder="Enter your Phone number or Wechat id" required>
+
+    <label for="hairstyle">Hairstyle</label>
+    <input type="text" id="hairstyle" placeholder="Noteless medium waist" required>
+
+    <label for="date">Booking Date</label>
+    <input type="date" id="date" required>
+
+     <button type="submit">Confirm Booking</button>
+</form>
+
+<div class="style-container">
+    <h4>To complete the booking process, a deposit of 50% has to be made before the appointment.</h4>
+    <h4>Failure to make it on time is ¥10.</h4>
+    <h3>Proceed to make payment:</h3>
+</div>
+
+<div class="gallery">
+    <img src="paymentA.jpg" alt="alipay">
+    <img src="paymentW.jpg" alt="wechat">
+</div>
+
+<div class="style-container">
+    <h3>For more information contact:</h3>
+    <h4>Chido_Reza7 on Wechat</h4>
+    <h4>+263 788 108 738 on WhatsApp</h4>
+    <h4>+86 130 5783 8464 for Calls</h4>
+    <h3>BOOK AN APPOINTMENT NOW!</h3>
+</div>
+
+<div class="gallery">
+    <img src="scancode.jpg" alt="mycode">
+</div>
+
+<p id="confirmation" style="margin-top:20px;font-weight:bold;"></p >
+
+
+<footer>© 2025 HairbyJosephine– Beautiful Hair, Beautiful You</footer>
+
+<script>
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const hairstyle = document.getElementById("hairstyle").value;
+        const date = document.getElementById("date").value;
+
+        if (!name || !phone || !hairstyle || !date) {
+        alert("Please fill in all fields.");
+        return;
+        }
+
+        const booking = { name, phone, hairstyle, date };
+
+        let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+        bookings.push(booking);
+        localStorage.setItem("bookings", JSON.stringify(bookings));
+
+        alert("Booking Confirmed! Thank you, " + name + ".");
+        window.location.href = "orders.html";
+    });
+</script>
+</body>
+</html>

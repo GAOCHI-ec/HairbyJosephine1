@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bookings-HairbyJosephine</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f3e8ff, #c084fc);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: white;
+            color: #6d28d9;
+            text-align: center;
+            padding: 20px;
+            font-size: 26px;
+            font-weight: bold;
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #6d28d9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #7e22ce;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f3e8ff;
+        }
+
+        .no-bookings {
+            text-align: center;
+            color: #6b21a8;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .nav-links a {
+            color: #6d28d9;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            color: #6b21a8;
+            font-size: 13px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>📋 Your Bookings</header>
+
+<div class="container">
+    <h2>Appointment List</h2>
+    <div id="bookingList"></div>
+
+    <div class="nav-links">
+        <a href="HairbyJosephine.html">Home</a > |
+        <a href="Booknow.html">Book Another</a >
+    </div>
+</div>
+
+<footer>© 2025 HairbyJosephine– Beautiful Hair, Beautiful You</footer>
+
+<script>
+    const bookingList = document.getElementById("bookingList");
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    if (bookings.length === 0) {
+        bookingList.innerHTML = "<p class='no-bookings'>No bookings yet. Go ahead and <a href='Booknow.html'>book one!</a ></p >";
+    } else {
+        let tableHTML = `
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Phone / WeChat</th>
+            <th>Hairstyle</th>
+            <th>Date</th>
+          </tr>
+      `;
+
+        bookings.forEach(b => {
+            tableHTML += `
+          <tr>
+            <td>${b.name}</td>
+            <td>${b.phone}</td>
+            <td>${b.hairstyle}</td>
+            <td>${b.date}</td>
+          </tr>
+        `;
+        });
+
+        tableHTML += `</table>`;
+        bookingList.innerHTML = tableHTML;
+    }
+</script>
+
+</body>
+</html>
